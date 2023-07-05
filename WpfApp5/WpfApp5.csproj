@@ -163,6 +163,10 @@
     <Compile Include="Migrations\20230704145627_try.designer.cs">
       <DependentUpon>20230704145627_try.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20230705154316_try2.cs" />
+    <Compile Include="Migrations\20230705154316_try2.designer.cs">
+      <DependentUpon>20230705154316_try2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContextModelSnapshot.cs" />
     <Compile Include="StaticFunctions.cs" />
     <Compile Include="TgUser.cs" />

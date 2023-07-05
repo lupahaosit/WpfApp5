@@ -26,18 +26,18 @@ namespace WpfApp5
         public MainWindow()
         {
             InitializeComponent();
-            //HtmCryptoParse cryptoParse = new HtmCryptoParse();
-            //List<Crypte> cryptes = cryptoParse.Generation();
-            //CryptoFabric cryptoFabric = new CryptoFabric();
-            //cryptoFabric.CryptoCheck(cryptes);
-            //cryptoFabric.PersentDbFill();
-            //Context context = new Context();
-            //foreach (var item in context.crypteItems)
-            //{
-            //    names.Add(item.name);
-            //}
-            //BoxWithNames.ItemsSource = names;
-            ContextTg tg = new ContextTg();
+            HtmCryptoParse cryptoParse = new HtmCryptoParse();
+            List<Crypte> cryptes = cryptoParse.Generation();
+            CryptoFabric cryptoFabric = new CryptoFabric();
+            cryptoFabric.CryptoCheck(cryptes);
+            cryptoFabric.PersentDbFill();
+            Context context = new Context();
+            foreach (var item in context.crypteItems)
+            {
+                names.Add(item.name);
+            }
+            BoxWithNames.ItemsSource = names;
+           
         }
     }
 }

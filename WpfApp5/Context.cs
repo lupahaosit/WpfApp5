@@ -14,9 +14,9 @@ namespace WpfApp5
         public DbSet<Crypte> crypteItems { get; set; }
         public DbSet<Persents> persents { get; set; }
 
-        public DbSet<TgUser> users;
+        public DbSet<TgUser> users { get; set; }
 
-        public DbSet<TgUsersInterests> interests;
+        public DbSet<TgUsersInterests> interests { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
