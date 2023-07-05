@@ -11,6 +11,7 @@ namespace WpfApp5
     {
         public static bool CryptoContains(this DbSet<Crypte> cryptes, Crypte crypte)
         {
+            if (cryptes == null)
             foreach (var item in cryptes)
             {
                 if (item.name.Contains(crypte.name) && item.shortName.Contains(crypte.shortName))

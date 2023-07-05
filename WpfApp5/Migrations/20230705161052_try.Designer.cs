@@ -9,7 +9,7 @@ using WpfApp5;
 namespace WpfApp5.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230704145627_try")]
+    [Migration("20230705161052_try")]
     partial class @try
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,6 +78,42 @@ namespace WpfApp5.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("persents");
+                });
+
+            modelBuilder.Entity("WpfApp5.TgUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("chatId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("users");
+                });
+
+            modelBuilder.Entity("WpfApp5.TgUsersInterests", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("chatId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("nameOfInterest")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("interests");
                 });
 #pragma warning restore 612, 618
         }

@@ -37,6 +37,7 @@ namespace WpfApp5
                 names.Add(item.name);
             }
             BoxWithNames.ItemsSource = names;
+            Bot_Logic botLogic = new Bot_Logic();
            
         }
     }

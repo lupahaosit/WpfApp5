@@ -33,17 +33,19 @@ namespace WpfApp5
                         Console.WriteLine(dbCrypte.Contains(item));
                         dbCrypte.Add(item);
                         cryptoHistory.Add(new CrypteHistory() { name = item.name, lastValue = item.value });
-                        while (dbCrypte.Count() >= 10)
-                        {
-                            dbCrypte.Remove(dbCrypte.OrderBy(x => x.Id).Last());
-                            cryptoHistory.Remove(cryptoHistory.OrderBy(x => x.Id).Last());
-                        }
+                        
                     }
                     else
                     {
                         cryptoHistory.Where(n => n.name.Contains(item.name)).First().lastValue = dbCrypte.Where(n => n.name.Contains(item.name)).First().value;
                         dbCrypte.Where(n => n.name.Contains(item.name)).First().value = item.value;
                     }
+                }
+                while (dbCrypte.Count() > 10)
+                {
+                    dbCrypte.Remove(dbCrypte.OrderBy(x => x.Id).Last());
+                    cryptoHistory.Remove(cryptoHistory.OrderBy(x => x.Id).Last());
+                    context.SaveChanges();
                 }
                 context.SaveChanges();
             }

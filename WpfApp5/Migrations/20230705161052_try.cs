@@ -37,6 +37,20 @@ namespace WpfApp5.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "interests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    chatId = table.Column<long>(nullable: false),
+                    nameOfInterest = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_interests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "persents",
                 columns: table => new
                 {
@@ -50,6 +64,20 @@ namespace WpfApp5.Migrations
                 {
                     table.PrimaryKey("PK_persents", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    name = table.Column<string>(nullable: true),
+                    chatId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -61,7 +89,13 @@ namespace WpfApp5.Migrations
                 name: "crypteItems");
 
             migrationBuilder.DropTable(
+                name: "interests");
+
+            migrationBuilder.DropTable(
                 name: "persents");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }
