@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,9 +28,13 @@ namespace WpfApp5
 
                 foreach (var item in cryptes)
                 {
+                    var x = dbCrypte.First().name;
+                    var z = cryptes.First().name;
+                    var y = x == z;
                     //Добавляет крипту в БД, если таковой нет
-                    if (!dbCrypte.CryptoContains(item))
+                    if (dbCrypte.Where(n => n.name.Equals(item.name)).Count() == 0)
                     {
+
                         Console.WriteLine(dbCrypte.Contains(item));
                         dbCrypte.Add(item);
                         cryptoHistory.Add(new CrypteHistory() { name = item.name, lastValue = item.value });
@@ -41,13 +46,8 @@ namespace WpfApp5
                         dbCrypte.Where(n => n.name.Contains(item.name)).First().value = item.value;
                     }
                 }
-                while (dbCrypte.Count() > 10)
-                {
-                    dbCrypte.Remove(dbCrypte.OrderBy(x => x.Id).Last());
-                    cryptoHistory.Remove(cryptoHistory.OrderBy(x => x.Id).Last());
-                    context.SaveChanges();
-                }
-                context.SaveChanges();
+               
+               
             }
             //Заполнение пустой БД
             else
@@ -71,6 +71,13 @@ namespace WpfApp5
                 }
                 context.SaveChanges();
 
+            }
+            context.SaveChanges();
+            while (dbCrypte.Count() > 10)
+            {
+                dbCrypte.Remove(dbCrypte.OrderBy(x => x.Id).Last());
+                cryptoHistory.Remove(cryptoHistory.OrderBy(x => x.Id).Last());
+                context.SaveChanges();
             }
             context.SaveChanges();
 

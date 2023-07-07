@@ -20,9 +20,12 @@ namespace WpfApp5
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
+
+     
     public partial class MainWindow : Window
     {
         ObservableCollection<string> names = new ObservableCollection<string>();
+        Dictionary<string, double> valuePairs = new Dictionary<string, double>();
         public MainWindow()
         {
             InitializeComponent();
@@ -36,9 +39,24 @@ namespace WpfApp5
             {
                 names.Add(item.name);
             }
+            foreach (var item in cryptes)
+            {
+                valuePairs.Add(item.name, item.value);
+            }
             BoxWithNames.ItemsSource = names;
+            BoxWithNames.Text = names[0];
+           
+
+            
+            
+                
             Bot_Logic botLogic = new Bot_Logic();
            
+        }
+
+        private void BoxWithNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            text_box.Text = Convert.ToString(valuePairs[BoxWithNames.Text]);
         }
     }
 }

@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ComboBox x:Name="BoxWithNames" HorizontalAlignment="Left" Margin="621,362,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="BoxWithNames" HorizontalAlignment="Left" Margin="621,362,0,0" VerticalAlignment="Top" Width="120" SelectionChanged ="BoxWithNames_SelectionChanged" />
+        <TextBox x:Name="text_box" HorizontalAlignment="Left" Margin="67,362,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.31,9.125"/>
+
 
 
     </Grid>

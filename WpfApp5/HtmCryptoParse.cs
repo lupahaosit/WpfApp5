@@ -19,7 +19,6 @@ namespace WpfApp5
             var cryptoTicket = doc.DocumentNode.Descendants("td").Where(x => x.Attributes["class"].Value == "left noWrap elp symb js-currency-symbol").ToList();
 
             var cryptoPrice = doc.DocumentNode.Descendants("td").Where(x => x.Attributes["class"].Value == "price js-currency-price").ToList();
-            var z = 5.3;
 
             List<Crypte> cryptes = new List<Crypte>();
             for (int i = 0; i < 10; i++)
