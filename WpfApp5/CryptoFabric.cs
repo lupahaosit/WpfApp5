@@ -102,7 +102,7 @@ namespace WpfApp5
             context1.SaveChanges();
 
         }
-
+        //функция записи данных о процентных изменениях курсов криптовалют
         public void PersentChangeFill()
         {
             Context context1 = new Context();

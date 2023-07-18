@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Telegram.Bot;
 
 namespace WpfApp5
 {
@@ -24,7 +26,7 @@ namespace WpfApp5
      
     public partial class MainWindow : Window
     {
-        ObservableCollection<string> names = new ObservableCollection<string>();
+        List<string> names = new List<string>();
         Dictionary<string, double> valuePairs = new Dictionary<string, double>();
         public MainWindow()
         {
@@ -35,6 +37,7 @@ namespace WpfApp5
             cryptoFabric.CryptoCheck(cryptes);
             cryptoFabric.PersentDbFill();
             Context context = new Context();
+            Bot_Logic botLogic = new Bot_Logic();
             foreach (var item in context.crypteItems)
             {
                 names.Add(item.name);
@@ -45,18 +48,41 @@ namespace WpfApp5
             }
             BoxWithNames.ItemsSource = names;
             BoxWithNames.Text = names[0];
-           
-
+            Thread thread = new Thread(IntervalUpdate);
+            thread.Start();
             
-            
-                
-            Bot_Logic botLogic = new Bot_Logic();
            
         }
 
         private void BoxWithNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            text_box.Text = Convert.ToString(valuePairs[BoxWithNames.Text]);
+            try
+            {
+                var x =  Convert.ToString(valuePairs[BoxWithNames.Text]);
+                text_box.Text = x;
+            }
+            catch (KeyNotFoundException)
+            {
+                text_box.Text = "Error";
+                
+            }
+           
+        }
+        public async void IntervalUpdate()
+        {
+            while (true)
+            {
+                Thread.Sleep(10000);
+                CryptoFabric cryptoFabric = new CryptoFabric();
+                cryptoFabric.PersentChangeFill();
+                Context context = new Context();
+                var users = context.users;
+                foreach (var item in users)
+                {
+                   await StaticFunctions.staticClient.SendTextMessageAsync(item.chatId, text: "hello world" );
+                }
+
+            }
         }
     }
 }

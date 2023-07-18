@@ -12,5 +12,11 @@ namespace WpfApp5
 
         public long chatId { get; set; }
         public string nameOfInterest { get; set; }
+
+        public TgUsersInterests(long chatId, string nameOfInterest)
+        {
+            this.chatId = chatId;
+            this.nameOfInterest = nameOfInterest;
+        }
     }
 }
