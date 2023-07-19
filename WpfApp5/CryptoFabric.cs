@@ -30,6 +30,7 @@ namespace WpfApp5
                 {
                     var x = dbCrypte.First().name;
                     var z = cryptes.First().name;
+                    var persents = context.persents;
                     var y = x == z;
                     //Добавляет крипту в БД, если таковой нет
                     if (dbCrypte.Where(n => n.name.Equals(item.name)).Count() == 0)
@@ -38,7 +39,18 @@ namespace WpfApp5
                         Console.WriteLine(dbCrypte.Contains(item));
                         dbCrypte.Add(item);
                         cryptoHistory.Add(new CrypteHistory() { name = item.name, lastValue = item.value });
+                       
+                    
                         
+                    }
+                    else
+                    {
+                        cryptoHistory.Where(n => n.name.Contains(item.name)).First().lastValue = dbCrypte.Where(n => n.name.Contains(item.name)).First().value;
+                        dbCrypte.Where(n => n.name.Contains(item.name)).First().value = item.value;
+                    }
+                    if (persents.Where(n => n.name == item.name).Count() == 0)
+                    {
+                        context.persents.Add(new Persents() { globalChangePersent = 0, lastChangePersent = 0, name = item.name });
                     }
                     else
                     {
@@ -73,13 +85,7 @@ namespace WpfApp5
 
             }
             context.SaveChanges();
-            while (dbCrypte.Count() > 10)
-            {
-                dbCrypte.Remove(dbCrypte.OrderBy(x => x.Id).Last());
-                cryptoHistory.Remove(cryptoHistory.OrderBy(x => x.Id).Last());
-                context.SaveChanges();
-            }
-            context.SaveChanges();
+          
 
         }
 

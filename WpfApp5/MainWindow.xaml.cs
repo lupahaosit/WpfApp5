@@ -23,7 +23,7 @@ namespace WpfApp5
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
 
-     
+
     public partial class MainWindow : Window
     {
         List<string> names = new List<string>();
@@ -48,41 +48,27 @@ namespace WpfApp5
             }
             BoxWithNames.ItemsSource = names;
             BoxWithNames.Text = names[0];
-            Thread thread = new Thread(IntervalUpdate);
-            thread.Start();
-            
-           
+
+            context.Dispose();
+
+
         }
 
         private void BoxWithNames_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                var x =  Convert.ToString(valuePairs[BoxWithNames.Text]);
+                var x = Convert.ToString(valuePairs[BoxWithNames.Text]);
                 text_box.Text = x;
             }
             catch (KeyNotFoundException)
             {
                 text_box.Text = "Error";
-                
-            }
-           
-        }
-        public async void IntervalUpdate()
-        {
-            while (true)
-            {
-                Thread.Sleep(10000);
-                CryptoFabric cryptoFabric = new CryptoFabric();
-                cryptoFabric.PersentChangeFill();
-                Context context = new Context();
-                var users = context.users;
-                foreach (var item in users)
-                {
-                   await StaticFunctions.staticClient.SendTextMessageAsync(item.chatId, text: "hello world" );
-                }
 
             }
+
         }
+
+
     }
 }
